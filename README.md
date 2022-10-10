@@ -12,7 +12,7 @@ A name should tell you why it exists, what it does, and how it is used. If a nam
 
 **Bad**
 
-```
+```JS
 var d; // elapsed time in days
 ```
 
@@ -20,7 +20,7 @@ It is a common misconception that you should hide your mess with comments. Do no
 
 **Good**
 
-```
+```JS
 var elapsedTimeInDays;
 var daysSinceCreation;
 var daysSinceModification;
@@ -32,13 +32,13 @@ If you can't pronounce a name, you can't discuss it without sounding silly.
 
 **Bad**
 
-```
+```JS
 const yyyymmdstr = moment().format("YYYY/MM/DD");
 ```
 
 **Good**
 
-```
+```JS
 const currentDate = moment().format("YYYY/MM/DD");
 ```
 
@@ -48,7 +48,7 @@ Avoid using magic numbers in your code. Opt for searchable, named constants. Do 
 
 **Bad**
 
-```
+```JS
 if (student.classes.length < 7) {
    // Do something
 }
@@ -56,7 +56,7 @@ if (student.classes.length < 7) {
 
 **Good**
 
-```
+```JS
 if (student.classes.length < MAX_CLASSES_PER_STUDENT) {
     // Do something
 }
@@ -70,7 +70,7 @@ If your class/object name tells you something, don't repeat that in your variabl
 
 **Bad**
 
-```
+```JS
 const Car = {
   carMake: "Honda",
   carModel: "Accord",
@@ -84,7 +84,7 @@ function paintCar(car, color) {
 
 **Good**
 
-```
+```JS
 const Car = {
   make: "Honda",
   model: "Accord",
@@ -102,7 +102,7 @@ Default parameters are often cleaner than circuiting. Be aware that if you use t
 
 **Bad**
 
-```
+```JS
 function createMicrobrewery(name) {
   const breweryName = name || "Hipster Brew Co.";
   // ...
@@ -111,7 +111,7 @@ function createMicrobrewery(name) {
 
 **Good**
 
-```
+```JS
 function createMicrobrewery(name = "Hipster Brew Co.") {
   // ...
 }
@@ -133,7 +133,7 @@ Once you get the hang of it, your code will look much more mature, and it will b
 
 **Bad**
 
-```
+```JS
 function emailClients(clients) {
   clients.forEach(client => {
     const clientRecord = database.lookup(client);
@@ -146,7 +146,7 @@ function emailClients(clients) {
 
 **Good**
 
-```
+```JS
 function emailActiveClients(clients) {
   clients.filter(isActiveClient).forEach(email);
 }
@@ -161,7 +161,7 @@ function isActiveClient(client) {
 
 **Bad**
 
-```
+```JS
 function addToDate(date, month) {
   // ...
 }
@@ -174,7 +174,7 @@ addToDate(date, 1);
 
 **Good**
 
-```
+```JS
 function addMonthToDate(month, date) {
   // ...
 }
@@ -189,7 +189,7 @@ Refactoring the condition and putting it into a named function is a good way to 
 
 **Bad**
 
-```
+```JS
 if (fsm.state === "fetching" && isEmpty(listNode)) {
   // ...
 }
@@ -197,7 +197,7 @@ if (fsm.state === "fetching" && isEmpty(listNode)) {
 
 **Good**
 
-```
+```JS
 function shouldShowSpinner(fsm, listNode) {
   return fsm.state === "fetching" && isEmpty(listNode);
 }
@@ -215,7 +215,7 @@ Arguments make it harder to read and understand the function. They are even hard
 
 **Bad**
 
-```
+```JS
 function createMenu(title, body, buttonText, cancellable) {
   // ...
 }
@@ -225,7 +225,7 @@ createMenu("Foo", "Bar", "Baz", true);
 
 **Good**
 
-```
+```JS
 function createMenu({ title, body, buttonText, cancellable }) {
   // ...
 }
@@ -244,7 +244,7 @@ Flags tell your user that this function does more than one thing. Functions shou
 
 **Bad**
 
-```
+```JS
 function createFile(name, temp) {
   if (temp) {
     fs.create(`./temp/${name}`);
@@ -256,7 +256,7 @@ function createFile(name, temp) {
 
 **Good**
 
-```
+```JS
 function createFile(name) {
   fs.create(name);
 }
@@ -274,7 +274,7 @@ The key point is, they promised to do another thing and you need to read the cod
 
 **Bad**
 
-```
+```JS
 // Global variable referenced by following function.
 // If we had another function that used this name, now it'd be an array and it could break it.
 let name = "Ryan McDermott";
@@ -290,7 +290,7 @@ console.log(name); // ['Ryan', 'McDermott'];
 
 **Good**
 
-```
+```JS
 function splitIntoFirstAndLastName(name) {
   return name.split(" ");
 }
@@ -308,7 +308,7 @@ Do your absolute best to avoid duplicate code. Duplicate code is bad because it 
 
 **Bad**
 
-```
+```JS
 function showDeveloperList(developers) {
   developers.forEach(developer => {
     const expectedSalary = developer.calculateExpectedSalary();
@@ -342,7 +342,7 @@ function showManagerList(managers) {
 
 **Good**
 
-```
+```JS
 function showEmployeeList(employees) {
   employees.forEach(employee => {
     const expectedSalary = employee.calculateExpectedSalary();
@@ -379,7 +379,7 @@ Constant variables should be capitalized
 
 **Bad**
 
-```
+```JS
 
 const DAYS_IN_WEEK = 7;
 const daysInMonth = 30;
@@ -396,7 +396,7 @@ class Alpaca {}
 
 **Good**
 
-```
+```JS
 const DAYS_IN_WEEK = 7;
 const DAYS_IN_MONTH = 30;
 
@@ -416,7 +416,7 @@ If a function calls another, keep those functions vertically close in the source
 
 **Bad**
 
-```
+```JS
 class PerformanceReview {
   constructor(employee) {
     this.employee = employee;
@@ -456,7 +456,7 @@ review.perfReview();
 
 **Good**
 
-```
+```JS
 class PerformanceReview {
   constructor(employee) {
     this.employee = employee;
@@ -502,7 +502,7 @@ Comments are an apology, not a requirement. Good code mostly documents itself.
 
 **Bad**
 
-```
+```JS
 function hashIt(data) {
   // The hash
   let hash = 0;
@@ -524,7 +524,7 @@ function hashIt(data) {
 
 **Good**
 
-```
+```JS
 function hashIt(data) {
   let hash = 0;
   const length = data.length;
@@ -545,7 +545,7 @@ Version control exists for a reason. Leave old code in your history.
 
 **Bad**
 
-```
+```JS
 doStuff();
 // doOtherStuff();
 // doSomeMoreStuff();
@@ -554,7 +554,7 @@ doStuff();
 
 **Good**
 
-```
+```JS
 doStuff();
 ```
 
@@ -564,7 +564,7 @@ Remember, use version control! There's no need for dead code, commented code, an
 
 **Bad**
 
-```
+```JS
 /**
  * 2016-12-20: Removed monads, didn't understand them (RM)
  * 2016-10-01: Improved using special monads (JP)
@@ -578,7 +578,7 @@ function combine(a, b) {
 
 **Good**
 
-```
+```JS
 function combine(a, b) {
   return a + b;
 }
@@ -608,14 +608,14 @@ GET, POST, PUT, PATCH, and DELETE are the commonest HTTP verbs. There are also o
 
 **Bad**
 
-```
+```JS
 https://mysite.com/getPosts
 https://mysite.com/createPost
 ```
 
 **Good**
 
-```
+```JS
 GET   https://mysite.com/posts
 POST  https://mysite.com/posts
 ```
@@ -630,13 +630,13 @@ You can think of the data of your API as a collection of different resources fro
 
 **Bad**
 
-```
+```JS
 https://mysite.com/post/123
 ```
 
 **Good**
 
-```
+```JS
 https://mysite.com/posts/123
 ```
 
@@ -648,7 +648,7 @@ So, instead of https://mysite.com/post/123, it should be https://mysite.com/post
 
 You should always use regular HTTP status codes in responses to requests made to your API. This will help your users to know what is going on – whether the request is successful, or if it fails, or something else.
 
-```
+```JS
 200 OK – Trả về thành công cho những phương thức GET, PUT, PATCH hoặc DELETE.
 201 Created – Trả về khi một Resouce vừa được tạo thành công.
 204 No Content – Trả về khi Resource xoá thành công.
@@ -670,7 +670,7 @@ Oftentimes, different endpoints can be interlinked, so you should nest them so i
 
 For example, in the case of a multi-user blogging platform, different posts could be written by different authors, so an endpoint such as:
 
-```
+```JS
 https://mysite.com/posts/author
 ```
 
@@ -678,7 +678,7 @@ would make a valid nesting in this case.
 
 In the same vein, the posts might have their individual comments, so to retrieve the comments, an endpoint like:
 
-```
+```JS
 https://mysite.com/posts/postId/comments
 ```
 
@@ -694,7 +694,7 @@ Filtering, sorting, and pagination are all actions that can be performed on the 
 
 An example of a filtered endpoint is the one below:
 
-```
+```JS
 https://mysite.com/posts?tags=javascript
 ```
 
@@ -706,11 +706,11 @@ SSL stands for secure socket layer. It is crucial for security in REST API desig
 
 The clear difference between the URL of a REST API that runs over SSL and the one which does not is the “s” in HTTP:
 
-```
+```JS
  https://mysite.com/posts runs on SSL.
 ```
 
-```
+```JS
 http://mysite.com/posts does not run on SSL.
 ```
 
@@ -724,11 +724,11 @@ An example of semantic versioning is 1.0.0, 2.1.2, and 3.3.4
 
 Many RESTful APIs from tech giants and individuals usually comes like this:
 
-```
+```JS
 https://mysite.com/v1/ for version 1
 ```
 
-```
+```JS
 https://mysite.com/v2 for version 2
 ```
 
