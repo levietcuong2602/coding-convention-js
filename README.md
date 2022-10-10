@@ -587,3 +587,159 @@ function combine(a, b) {
 ## II. Best practice REST API
 
 In Web Development, REST APIs play an important role in ensuring smooth communication between the client and the server.
+
+Communication between the client (frontend) and the server (backend) isn't usually super direct. So we use an interface called an Application Programming Interface (or API) to act as an intermediary between the client and the server.
+
+Because API plays a crucial role in this client–server communication, we should always design APIs with best practices in mind. This helps the developers maintaining them, and those consuming them as well, not run into issues while performing those duties.
+
+### Use JSON as the Format for Sending and Receiving Data
+
+In the past, accepting and responding to API requests were done mostly in XML and even HTML. But these days, JSON (JavaScript Object Notation) has largely become the de-facto format for sending and receiving API data.
+
+To ensure the client interprets JSON data correctly, you should set the Content-Type type in the response header to application/json while making the request.
+
+### Use Nouns Instead of Verbs in Endpoints
+
+When you're designing a REST API, you should not use verbs in the endpoint paths. The endpoints should use nouns, signifying what each of them does.
+
+This is because HTTP methods such as GET, POST, PUT, PATCH, and DELETE are already in verb form for performing basic CRUD (Create, Read, Update, Delete) operations.
+
+GET, POST, PUT, PATCH, and DELETE are the commonest HTTP verbs. There are also others such as COPY, PURGE, LINK, UNLINK, and so on.
+
+**Bad**
+
+```
+https://mysite.com/getPosts
+https://mysite.com/createPost
+```
+
+**Good**
+
+```
+GET   https://mysite.com/posts
+POST  https://mysite.com/posts
+```
+
+Instead, it should be something like this: https://mysite.com/posts
+
+In short, you should let the HTTP verbs handle what the endpoints do. So GET would retrieve data, POST will create data, PUT will update data, and DELETE will get rid of the data.
+
+### Name Collections with Plural Nouns
+
+You can think of the data of your API as a collection of different resources from your consumers.
+
+**Bad**
+
+```
+https://mysite.com/post/123
+```
+
+**Good**
+
+```
+https://mysite.com/posts/123
+```
+
+If you have an endpoint like https://mysite.com/post/123 but `post` it doesn’t tell the user that there could be some other posts in the collection. This is why your collections should use plural nouns.
+
+So, instead of https://mysite.com/post/123, it should be https://mysite.com/posts/123.
+
+### Use Status Codes in Error Handling
+
+You should always use regular HTTP status codes in responses to requests made to your API. This will help your users to know what is going on – whether the request is successful, or if it fails, or something else.
+
+```
+200 OK – Trả về thành công cho những phương thức GET, PUT, PATCH hoặc DELETE.
+201 Created – Trả về khi một Resouce vừa được tạo thành công.
+204 No Content – Trả về khi Resource xoá thành công.
+304 Not Modified – Client có thể sử dụng dữ liệu cache, resource server không đổi gì.
+400 Bad Request – Request không hợp lệ
+401 Unauthorized – Request cần có xác thực.
+403 Forbidden – bị từ chối không cho phép.
+404 Not Found – Không tìm thấy resource từ URI
+405 Method Not Allowed – Phương thức không cho phép với user hiện tại.
+410 Gone – Resource không còn tồn tại, Version cũ đã không còn hỗ trợ.
+415 Unsupported Media Type – Không hỗ trợ kiểu Resource này.
+422 Unprocessable Entity – Dữ liệu không được xác thực
+429 Too Many Requests – Request bị từ chối do bị giới hạn
+```
+
+### Use Nesting on Endpoints to Show Relationships
+
+Oftentimes, different endpoints can be interlinked, so you should nest them so it's easier to understand them.
+
+For example, in the case of a multi-user blogging platform, different posts could be written by different authors, so an endpoint such as:
+
+```
+https://mysite.com/posts/author
+```
+
+would make a valid nesting in this case.
+
+In the same vein, the posts might have their individual comments, so to retrieve the comments, an endpoint like:
+
+```
+https://mysite.com/posts/postId/comments
+```
+
+would make sense.
+
+You should avoid nesting that is more than 3 levels deep as this can make the API less elegant and readable.
+
+### Use Filtering, Sorting, and Pagination to Retrieve the Data Requested
+
+Sometimes, an API's database can get incredibly large. If this happens, retrieving data from such a database could be very slow.
+
+Filtering, sorting, and pagination are all actions that can be performed on the collection of a REST API. This lets it only retrieve, sort, and arrange the necessary data into pages so the server doesn’t get too occupied with requests.
+
+An example of a filtered endpoint is the one below:
+
+```
+https://mysite.com/posts?tags=javascript
+```
+
+This endpoint will fetch any post that has a tag of JavaScript.
+
+### Use SSL for Security
+
+SSL stands for secure socket layer. It is crucial for security in REST API design. This will secure your API and make it less vulnerable to malicious attacks.
+
+The clear difference between the URL of a REST API that runs over SSL and the one which does not is the “s” in HTTP:
+
+```
+ https://mysite.com/posts runs on SSL.
+```
+
+```
+http://mysite.com/posts does not run on SSL.
+```
+
+### Be Clear with Versioning
+
+REST APIs should have different versions, so you don’t force clients (users) to migrate to new versions. This might even break the application if you're not careful.
+
+One of the commonest versioning systems in web development is `semantic versioning`.
+
+An example of semantic versioning is 1.0.0, 2.1.2, and 3.3.4
+
+Many RESTful APIs from tech giants and individuals usually comes like this:
+
+```
+https://mysite.com/v1/ for version 1
+```
+
+```
+https://mysite.com/v2 for version 2
+```
+
+### Provide Accurate API Documentation
+
+When you make a REST API, you need to help clients (consumers) learn and figure out how to use it correctly. The best way to do this is by providing good documentation for the API.
+The documentation should contain:
+
+- Relevant endpoints of the API
+- Example requests of the endpoints
+- Implementation in several programming languages
+- Messages listed for different errors with their status codes.
+
+One of the most common tools you can use for API documentation is Swagger. And you can also use Postman, one of the most common API testing tools in software development, to document your APIs.
